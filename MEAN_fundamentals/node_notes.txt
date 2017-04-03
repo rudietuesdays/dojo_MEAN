@@ -1,0 +1,3 @@
+// node manages server-side script
+// bower manages front-end dependencies
+  // check out browserify and webpack for more module options
