@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>GitHib API practice</title>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+
+<body>
+  <button type="button" name="button">click me for data!</button>
+  <div class="username">  </div>
+  <script type="text/javascript">
+
+    // Notice that displayName is a function that takes in 1 parameter (this is the data that comes back from the API)
+    function displayName(data) {
+      console.log(data);
+      var username = data.login
+      $(".username").html(`<p>${username}</p>`)
+    }
+
+    $("button").on("click", function(){
+      $.get("https://api.github.com/users/rudietuesdays", displayName)
+    });
+  </script>
+</body>
+
+</html>

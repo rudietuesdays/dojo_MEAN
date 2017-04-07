@@ -14,7 +14,7 @@ function VehicleConstructor(name, wheels, passengers, speed){
   this.passengers =  passengers || 0;
   this.speed =  speed || 100;
 
-  //public method
+  //public methods
   this.makeNoise = function(noise){
     //noise is a private var
     var noise = noise || "beepity beep"

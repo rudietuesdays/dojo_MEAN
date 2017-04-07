@@ -1,0 +1,43 @@
+<!-- another way of solving this assignment: -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<style type="text/css">
+button{
+	background-color: blue;
+	color: white;
+}
+.red{
+	background-color: red;
+}
+.green{
+	background-color: green;
+}
+</style>
+<button class="button" type="button" name="button">click me!</button>
+
+<script type="text/javascript">
+function addGreenColor(){
+  $(this).addClass("green");
+}
+
+function removeGreenColor(){
+  $(this).removeClass("green");
+}
+
+$(document).on('click', '.button', function(){
+	$(this).toggleClass("red");
+});
+
+
+$(".button").hover(function(){
+	$(this).addClass("green")
+}, function(){ $(this).removeClass("green") });
+
+$(document).keypress(function(e) {
+  if (e.which == 13) {
+    console.log("You pressed enter");
+    $("body").append(`<button class="button" type="button" name="button">click me!</button>`)
+  }
+  $(".button").hover(addGreenColor, removeGreenColor);
+});
+
+</script>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Survey Form</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <style>
+      #notice{
+        background-color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        var socket = io.connect();
+
+        $(".surveyForm").submit(function(e){
+          e.preventDefault();
+          socket.emit('submittedForm', {
+            name: $('#name').val(),
+            location: $('#location').val(),
+            language: $('#langauge').val(),
+            comments: $('#comments').val(),
+          })
+        })
+
+        socket.on('sentData', function(data){
+          console.log(data);
+          data = JSON.stringify(data.data)
+          $('#notice').html(`<p>You emitted the following info: ${data}</p>`)
+        })
+
+      })
+    </script>
+    <div id="notice">
+
+    </div>
+    <div class="">
+      <form class="surveyForm" action="index.html" method="post">
+        <p>Name: <input type="text" id="name"></p>
+        <p>Dojo Location:</p>
+        <select id="location">
+          <option value="DC">Washington, DC</option>
+          <option value="WA">Seattle, WA</option>
+          <option value="CA">San Francisco, CA</option>
+        </select>
+        <p>Fave Language: </p>
+        <select id="language">
+          <option value="JS">Javascript</option>
+          <option value="ruby">Ruby</option>
+          <option value="python">Python</option>
+        </select>
+        <p>Comments (optional):</p>
+        <textarea id="comments" rows="8" cols="80"></textarea>
+        <p><input type="submit"></p>
+      </form>
+    </div>
+  </body>
+</html>

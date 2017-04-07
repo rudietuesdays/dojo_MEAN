@@ -1,0 +1,18 @@
+MVC in MEAN
+
+Models
+  Mongoose
+  Mongo DB
+
+Controllers
+  Node.js
+  Express (module of Node)
+  // event loop happens here
+
+Views
+
+/*************************************/
+
+*Sockets* are a feature for client/server communication
+// sockets keep an HTTP request open between the client and server so they don't need to request a new connection every time something happens
+// kind of like staying on the phone rather than calling over and over
