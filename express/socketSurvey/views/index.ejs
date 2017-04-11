@@ -31,12 +31,14 @@
           data = JSON.stringify(data.data)
           $('#notice').html(`<p>You emitted the following info: ${data}</p>`)
         })
+        socket.on('random_number', function (data){
+          $('#rand_num').html("Your lucky number emitted by the server is : " + JSON.stringify(data.response));
+			  });
 
       })
     </script>
-    <div id="notice">
-
-    </div>
+    <div id="notice"></div>
+    <div id="rand_num"></div>
     <div class="">
       <form class="surveyForm" action="index.html" method="post">
         <p>Name: <input type="text" id="name"></p>

@@ -16,11 +16,15 @@ app.get('/', function(req, res) {
 var server = app.listen(8000, function() {
  console.log("listening on port 8000");
 })
+// start sockets *after* creating var server bc server is a parameter!
 var io = require('socket.io').listen(server)
 // connect your sockets
 io.sockets.on('connection', function(socket){
   socket.on('submittedForm', function(data){
+    console.log("socket.id is", socket.id);
     console.log(data);
-    socket.emit('sentData', {data})
+    var random_number = Math.floor((Math.random() * 1000) + 1);
+    socket.emit('sentData', {data});
+    socket.emit('random_number', {response: random_number});
   })
 })
