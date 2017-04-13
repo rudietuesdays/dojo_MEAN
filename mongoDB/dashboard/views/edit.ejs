@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>P A N D A S | edit</title>
+  </head>
+  <body>
+    <h1><%= panda.name %></h1>
+    <form action="/pandas/<%= panda._id %>" method="post">
+      <p>
+        New name:
+        <input type="text" name="name" value="<%= panda.name %>">
+        <input type="submit" value="Update panda">
+      </p>
+    </form>
+    <form action="/pandas/destroy/<%= panda._id %>" method="post">
+      <input type="submit" value="Delete panda">
+    </form>
+  </body>
+</html>

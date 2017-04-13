@@ -154,3 +154,99 @@ app.post('/users', function (req, res){
      <h3><%= errors[x].message %></h3>
     <% } %>
 <% } %>
+
+// native mongoose validation example:
+UserSchema.path('email').required(true, 'User email cannot be blank');
+
+/**************************************/
+
+// *associations*
+// make sure you first create your *schemas* for the models you plan to associate!
+
+//example of a one-to-many association:
+  var Schema = mongoose.Schema;
+  var postSchema = new mongoose.Schema({
+   text: { type: String, required: true },
+   comments: [{type: Schema.Types.ObjectId, ref: 'Comment'}] // notice that this document is an array and the ref: to Comment
+  }, { timestamps: true });
+
+  var commentSchema = new mongoose.Schema({
+   _post: {type: Schema.Types.ObjectId, ref: 'Post'}, // notice '_post' and the ref:
+   text: { type: String, required: true },
+  }, {timestamps: true });
+
+  //** as an FYI, 'Comment' is a reserved word sometimes in JS, so don't use that to name your Model
+
+  // to show a post with all its comments in server.js:
+  app.get('/posts/:id', function (req, res){
+    Post.findOne({_id: req.params.id})
+    // .populate grabs all the comments using their id's stored in the comment property array of the post document
+    .populate('comments')
+    .exec(function(err, post) {
+      res.render('post', {post: post});
+        });
+      });
+
+  // to update one side of the one-to-many asssoc, both must be updated:
+  app.post('/posts/:id', function (req, res){
+    Post.findOne({_id: req.params.id}, function(err, post){
+      var comment = new Comment(req.body); // req.body pulls data from form on the front end
+      //  set the reference like this:
+      comment._post = post._id;
+      comment.save(function(err){     // save comment to the DB
+        post.comments.push(comment);
+        post.save(function(err){      // save post to the DB
+           if(err) {
+              console.log('Error');
+           } else {
+              res.redirect('/');
+           }
+         });
+       });
+    });
+  });
+
+// this process works for one-to-many and one-to-one relationships. if you need to build a many-to-many relationship, you probably shouldn't be using mongo
+
+/**************************************/
+
+// *embedding documents*
+// great practice for nesting docs in other docs!
+// for example, turn this:
+  {
+   _id: "dojo",
+   name: "CodingDojo"
+  }
+  {
+   business_id: "dojo",
+   street: "10777 Main Street",
+   city: "Bellevue",
+   state: "WA",
+   zip: "98004"
+  }
+  {
+   business_id: "dojo",
+   street: "1980 Zanker Road",
+   city: "San Jose",
+   state: "CA",
+   zip: "95112"
+  }
+// into this:
+  {
+    name: "CodingDojo",
+    locations: [
+      {
+        street: "10777 Main Street",
+        city: "Bellevue",
+        state: "WA",
+        zip: "98004"
+      },
+      {
+        street: "1980 Zanker Road",
+        city: "San Jose",
+        state: "CA",
+        zip: "95112"
+      }
+    ]
+  }
+   //saves you from having to query for _id and business_id every time

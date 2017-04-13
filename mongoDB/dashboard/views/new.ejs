@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>P A N D A S | new</title>
+  </head>
+  <body>
+    <h1>Add a new panda</h1>
+    <% if(typeof(errors) != 'undefined' ) { %>
+      <% for (var x in errors) { %>
+        <h3><%= errors[x].message %></h3>
+      <% } %>
+    <% } %>
+    <form action="/pandas" method="post">
+      <input type="text" name="name" placeholder="Enter a panda name">
+      <input type="submit" value="Create a new panda">
+    </form>
+  </body>
+</html>

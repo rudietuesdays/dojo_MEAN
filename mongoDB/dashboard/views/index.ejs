@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>P A N D A S | home</title>
+  </head>
+  <body>
+    <h1>All the pandas</h1>
+    <% for (var p in pandas) { %>
+      <p>
+        <%= pandas[p].name %> |
+        <a href="/pandas/edit/<%= pandas[p]._id %>">Edit</a> 
+      </p>
+    <% } %>
+    <p><a href="/pandas/new">Add a new panda</a></p>
+  </body>
+</html>
