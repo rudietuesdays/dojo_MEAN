@@ -1,0 +1,12 @@
+<div ng-controller='pandaController'>
+  <h1>All the pandas</h1>
+
+  <p ng-repeat='p in pandas track by $index'>
+    {{ p.name }} |
+      <button type="button" ng-click='editPanda(p._id)'>Edit</button>
+      <button type="button" ng-click='deletePanda(p._id)'>Delete</button>
+      <button type="button" ng-click='showPanda(p._id)'>Show</button>
+  </p>
+
+  <p><a href="#!/pandas/new">Add a new panda</a></p>
+</div>

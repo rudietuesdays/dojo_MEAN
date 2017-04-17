@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html ng-app='app'> <!-- added ng-app directive to html element! -->
+<head>
+    <meta charset="utf-8">
+    <title>Angular</title>
+    <script src="bower_components/angular/angular.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      var myApp = angular.module('app', []);
+
+      // the .controller() method adds a controller to the module
+      myApp.controller('studentsController', function ($scope){
+          // $scope, inside these functions, is like using this.fx() or this.var
+          $scope.students = [
+            {name: 'Mike', age: 34},
+            {name: 'John', age: 24},
+            {name: 'Trey', age: 24},
+            {name: 'India', age: 35}
+          ];
+          $scope.addStudent = function (){
+            // add to the array
+            $scope.students.push($scope.newStudent);
+            // clear the form values
+            $scope.newStudent = {};
+          }
+      });
+
+      // myApp.controller('PlayersController', ['$scope', 'newinjectable', function($scope, "custom name of new injectable") {
+      //   //javascript that controls the Player view goes here:
+      // }]);
+
+    </script>
+</head>
+<body ng-init=" dojo='ninja' ">  <!-- added ng-init directive to body element and assigned a variable! -->
+  <h1>{{ dojo }}</h1> <!-- Should see 'ninja' printed to the page! -->
+  <h3>{{ 49567 * 2243 }} </h3>
+  <h5 ng-bind='49567 * 2243'></h5>
+  <div ng-init="students1=[{name: 'Mike', age: 34}, {name: 'John', age: 24}, {name: 'Trey', age: 24}, {name: 'India', age: 35}]">
+    <h4>no controller in this div:</h4>
+    <ul>
+        <li ng-repeat="student in students1">{{student.name}}, {{student.age}}</li>
+    </ul>
+  </div>
+  <hr>
+  <div ng-controller='studentsController'>
+    <h4>this div uses a controller:</h4>
+    <h3>Add a new student!</h3>
+    <form>
+        Name: <input type='text' ng-model='newStudent.name'>
+        Age: <input type='text' ng-model='newStudent.age'>
+        <input type='submit' value='add new student' ng-click='addStudent()'>
+    </form>
+    <ul>
+        <li ng-repeat="student in students">{{ student.name }}, {{ student.age }}</li>
+    </ul>
+  </div>
+</body>
+</html>

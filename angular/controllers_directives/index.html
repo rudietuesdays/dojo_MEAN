@@ -25,12 +25,14 @@
         <input type="submit" value="Add food" ng-click='addFood()'>
       </form>
       <h3>Currently typing: <span ng-bind='newFood.name'></span></h3>
+      <p>or...</p>
+      <h3 ng-if='newFood.name'>Currently typing: {{newFood.name}}</h3>
       <h3>Foods:</h3>
       <form>
         <input type="text" ng-model='filterFood' placeholder="filter...">
       </form>
       <ul>
-        <li ng-repeat='f in foods | filter: filterFood'>{{f.name}}</li>
+        <li ng-repeat='f in foods | filter: filterFood track by $index'>{{f.name}}</li>
       </ul>
     </div>
   </body>

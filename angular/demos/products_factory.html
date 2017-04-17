@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html ng-app='app'>
+  <head>
+    <meta charset="utf-8">
+    <title>products</title>
+    <script src='./bower_components/angular/angular.js'></script>
+    <script type="text/javascript">
+      var app = angular.module('app', []);
+      app.factory('productsFactory', function(){
+        var products = [{name: 'fork', price: 4}];
+        var factory = {};
+        factory.getProducts = function(callback){
+          callback(products)
+        }
+        return factory;
+      });
+      app.controller('productsController', ['$scope', 'productsFactory', function($scope, productsFactory){
+        $scope.products = [];
+        $scope.addProduct = function(){
+          $scope.products.push($scope.product);
+          $scope.product = {};
+        }
+        $scope.deleteProduct = function(index){
+          $scope.products.splice(index, 1)
+        }
+        productsFactory.getProducts(function(data){
+          $scope.products = data;
+        })
+      }])
+    </script>
+  </head>
+  <body>
+    <div ng-controller='productsController'>
+      <h1>Products Controller</h1>
+      <form>
+        <p>Name: <input type="text" ng-model='product.name'></p>
+        <p>Price: <input type="number" ng-model='product.price'></p>
+        <input type="submit" value="Add product" ng-click='addProduct()'>
+      </form>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat='p in products | orderBy:"price" track by $index'>
+            <td>{{p.name}}</td>
+            <td>{{p.price | currency:"USD$":0}}</td>
+            <td><button type="button" ng-click='deleteProduct($index)'>Delete Product</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
