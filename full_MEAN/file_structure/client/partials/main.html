@@ -1,0 +1,20 @@
+<div ng-controller='FriendsController'>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Show</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat='friend in friends track by $index'>
+        <td>{{friend.first}} {{friend.last}}</td>
+        <td><button type="button" ng-click="showFriend(friend._id)">show</button></td>
+        <td><button type="button" ng-click="editFriend(friend._id)">edit</button></td>
+        <td><button type="button" ng-click="deleteFriend(friend._id)">delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
