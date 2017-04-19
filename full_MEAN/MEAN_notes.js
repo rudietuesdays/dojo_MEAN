@@ -247,3 +247,31 @@ customerSchema.virtual( 'name.full' ).get( function () {
   return this.name.first + " " + this.name.last;
   // return `${ this.name.first } ${ this.name.last}`;
 });
+
+/************************************************/
+
+// building strategies
+
+// Before starting a larger project, make a plan of how you want to break the project into pieces you understand
+// A good piece should be testable, some examples:
+  // a) You could build out a server. Does it run?
+  // b) You could add routes that return garbage JSON objects - when you go to the route does your garbage JSON show up?
+// Making the plan: what does the client want?
+  // a) What are all of the routes on any given page?
+    // Can we place these routes into typical RESTful routes?
+    // Do we need to create custom routes?
+  // b) Are there pieces of the project that we don’t know how to accomplish? Are they critical or are they optional to the client?
+    // if they are critical: figure out how to do them before starting the project
+    // if they are optional: define a time frame where you try to figure them out, but don’t go too far down a rabbit hole
+// When implementing each piece of the project:
+  // Make a git branch,
+  // test it,
+  // if it works, merge it.
+// Typical build strategies:
+  // front end first, HTTP connections to dummy data
+  // server and routes
+  // database
+// OR
+  // database first
+  // server and routes to the database
+  // front-end with HTTP connections

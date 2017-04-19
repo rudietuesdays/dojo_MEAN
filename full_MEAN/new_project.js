@@ -2,7 +2,7 @@
 // mkdir <projname>
 // cd <projname>
 // npm install express body-parser mongoose bcrypt --save
-// bower install angular angular-route angular-cookies angular-messages#X.Y.Z --save
+// bower install angular angular-route angular-cookies angular-messages --save
 
 // *** modeled from dir file_structure *** //
 

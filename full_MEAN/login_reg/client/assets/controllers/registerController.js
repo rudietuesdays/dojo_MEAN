@@ -1,4 +1,4 @@
-app.controller('registerController', ['$scope', '$location', '$routeParams', 'userFactory', function($scope, $location, $routeParams, userFactory){
+app.controller('registerController', ['$scope', '$location', '$cookies', '$routeParams', 'userFactory', function($scope, $location, $cookies, $routeParams, userFactory){
   console.log('registration controller loaded');
 
   $scope.registerUser = function(){
@@ -10,6 +10,10 @@ app.controller('registerController', ['$scope', '$location', '$routeParams', 'us
         if (data.data.errors){
           $scope.errors = data.data.errors
         } else {
+          // console.log(data);
+          $cookies.put('user', data.data._id);
+          var userCookie = $cookies.get('user');
+          console.log('user cookie:', userCookie);
           $scope.newUser = {};
           $location.url('/dashboard');
         }
