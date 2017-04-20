@@ -1,0 +1,31 @@
+<div ng-controller='wallController'>
+  <h3>Welcome, {{user.username}} ! | <a href="" ng-click="logoutUser()">log out</a></h3>
+  <form ng-submit='createMessage(user._id)'>
+    <p>Post a message:</p>
+    <textarea ng-model='message.content' rows="8" cols="80"></textarea>
+    <p>{{message_errors}}</p>
+    <p><input type="submit" value="post a message"></p>
+  </form>
+  <div ng-repeat="message in messages | orderBy: '-createdAt' track by $index">
+    <p>
+      {{message._user.username}} {{message.createdAt | date: 'short'}}
+      <br>
+      {{message.content}}
+    </p>
+    <div class="comments">
+      <div ng-repeat="comment in message.comments">
+        <p>
+          {{comment._user.username}} {{comment.createdAt | date: 'short'}}
+          <br>
+          {{comment.content}}
+        </p>
+      </div>
+      <form ng-submit='createComment(message._id, user._id, $index)'>
+        <p>Add comment:</p>
+        <textarea ng-model="newComment[$index].content" rows="6" cols="40" required></textarea>
+        <input type="submit" name="" value="post a comment">
+      </form>
+    </div>
+    <hr>
+  </div>
+</div>

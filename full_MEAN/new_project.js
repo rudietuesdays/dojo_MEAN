@@ -21,8 +21,7 @@
 /* server-side set up */
 // cd ..
 // cd server
-// mkdir controllers
-// mkdir models
+// mkdir controllers models
 // cd controllers
 // touch <controllers>.js (build it!)
 // cd ..
@@ -32,7 +31,16 @@
 /* client-side set up */
 // cd ../..
 // cd client
-// mkdir partials
+// mkdir partials assets
 // cd partials
 // touch new.html
 // touch edit.html (...etc and build 'em)
+// cd ..
+// cd assets
+// touch app.js
+// mkdir controllers factories
+// cd factories
+// touch <factoryFactory>.js
+// cd ..
+// cd controllers
+// touch <controllersController>.js
