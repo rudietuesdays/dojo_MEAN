@@ -1,0 +1,25 @@
+<div ng-controller="productsController">
+	<form>
+		<h3>Add a new product</h3>
+		<p>Name: <input type="text" placeholder="name..."></p>
+		<p>Image (url): <input type="text" placeholder="http://"></p>
+		<p>Description:</p>
+		<textarea rows="20" cols="20"></textarea>
+		<p>Initial quantity:</p>
+		<select>
+			<option>1</option>
+		</select>
+		<input type="submit" value="Create">
+	</form>
+	<div class="products">
+		<p>product</p>
+		<p>product</p>
+		<p>product</p>
+		<a href="#!/products">show more...</a>
+	</div>
+
+	<div ng-if="newUser">
+		<h2>My new user!</h2>
+		<p>{{newUser.first_name}} {{newUser.last_name}}</p>
+	</div>
+</div>

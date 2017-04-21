@@ -30,7 +30,7 @@ app.controller('wallController', ['$scope', '$location', '$cookies', '$routePara
       var showComments = function(){
         commentFactory.show(function(data){
           $scope.comments = data.data.comments;
-          // console.log('all the messages:', data.data.messages);
+          // console.log('all the comments:', data.data.comments);
         });
       }
 

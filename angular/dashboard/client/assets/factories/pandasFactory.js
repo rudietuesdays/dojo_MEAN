@@ -43,4 +43,6 @@ app.factory('pandasFactory', ['$http', function($http){
       }
     });
   }
+
+  return factory;
 }])
