@@ -3,9 +3,14 @@ var products = require('../controllers/products.js')
 var orders = require('../controllers/orders.js')
 
 module.exports = function(app){
-	// app.post('/users', users.create);
-	// app.get('/users', users.index);
+  //customer routes
+	app.post('/customers', customers.create);
+	app.get('/customers', customers.index);
 	// app.get('/users/:id', users.show)
 	// app.put('/users/:id', users.update);
-	// app.delete('/users/:id', users.delete);
+	app.delete('/customers/:id', customers.delete);
+
+  //product routes
+  app.get('/products', products.index);
+  app.post('/products', products.create);
 }

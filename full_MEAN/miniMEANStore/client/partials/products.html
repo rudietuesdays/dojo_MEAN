@@ -1,20 +1,24 @@
 <div ng-controller="productsController">
-	<form>
+	<form ng-submit="createProduct()">
 		<h3>Add a new product</h3>
-		<p>Name: <input type="text" placeholder="name..."></p>
-		<p>Image (url): <input type="text" placeholder="http://"></p>
+		<p>Name: <input type="text" placeholder="name..." ng-model="newProduct.name" required></p>
+		<p>Image (url): <input type="text" placeholder="http://" ng-model="newProduct.image" required></p>
 		<p>Description:</p>
-		<textarea rows="20" cols="20"></textarea>
+		<textarea rows="20" cols="20" ng-model="newProduct.description" required></textarea>
 		<p>Initial quantity:</p>
-		<select>
+		<select ng-model="newProduct.quantity" required>
 			<option>1</option>
+			<option>5</option>
+			<option>10</option>
+			<option>15</option>
+			<option>20</option>
 		</select>
 		<input type="submit" value="Create">
 	</form>
-	<div class="products">
-		<p>product</p>
-		<p>product</p>
-		<p>product</p>
+	<div class="products" ng-repeat="product in products">
+		<p><img src="{{product.image}}" style='width:128px'></p>
+		<p>{{product.name}}</p>
+		<p>({{product.quantity}} left)</p>
 		<a href="#!/products">show more...</a>
 	</div>
 

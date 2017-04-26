@@ -4,16 +4,16 @@
     <p>
       Customer
       <select>
-        <option>name</option>
+        <option ng-repeat="customer in customers">{{customer.name}}</option>
       </select>
     </p>
     <p>
       Order
       <select>
-        <option>1</option>
+        <option ng-model="product.quantity">{{product.quantity}}</option>
       </select>
       <select>
-        <option>product</option>
+        <option ng-repeat="product in products">{{product.name}}</option>
       </select>
     </p>
     <input type="submit" value="Order">

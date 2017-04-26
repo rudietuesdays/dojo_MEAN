@@ -9,9 +9,17 @@ var OrderSchema = new Schema({
     required: true
   },
 
-  _customer: {type: Schema.Types.ObjectId, ref: 'Customer'},
+  _customer: {
+    type: Schema.Types.ObjectId,
+    ref: 'Customer',
+    required: [true, "Select a customer"]
+  },
 
-	_product: {type: Schema.Types.ObjectId, ref: 'Product'}
+	_product: {
+    type: Schema.Types.ObjectId,
+    ref: 'Product',
+    required: [true, "Select a product"]
+  }
 
 },{timestamps:true})
 

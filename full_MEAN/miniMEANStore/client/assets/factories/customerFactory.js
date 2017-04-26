@@ -1,20 +1,42 @@
-app.factory('welcomeFactory', ['$http', function($http) {
-  var welcome_message = "Welcome to the simple Mean project set up."
-  function WelcomeFactory(){
-  	console.log("welcome factory instantiated")
-	  this.index = function(callback){
-	    callback(welcome_message)
-	  }
-	  this.create = function(newUser, callback){
-	  	console.log("inside factory create")
-	  	console.log("newUser:", newUser)
-	  	alert("entering backend console!")
-	  	$http.post('/users', newUser).then(function(response_data){
-	  		console.log("inside factory create http callback")
-	  		console.log(response_data)
-	  		callback(response_data)
-	  	})
-	  }
+app.factory('customerFactory', ['$http', function($http) {
+
+  console.log('customer factory instantiated');
+
+  var customers = [];
+  var customer = {};
+  var factory = {};
+
+  factory.show = function(callback){
+    $http.get('/customers')
+    .then(function(returned_data){
+      if (typeof(callback) == 'function'){
+        callback(returned_data);
+        // console.log(returned_data);
+      }
+    })
+  };
+
+  factory.create = function(newCustomer, callback){
+    $http.post('/customers', newCustomer)
+    .then(function(returned_data){
+      if(typeof(callback) == 'function'){
+        callback(returned_data);
+        if(returned_data.data.errors || returned_data.data.errmsg){
+          // console.log('ERRORS: ', returned_data.data.errors);
+        } else { console.log('returned data: ', returned_data);}
+      }
+    })
+  };
+
+  factory.delete = function(id, callback){
+    $http.delete('/customers/'+ id)
+    .then(function(returned_data){
+      if (typeof(callback) ==
+    'function'){
+      callback(returned_data);
+    }
+    })
   }
-  return new WelcomeFactory();
+
+  return factory;
 }]);

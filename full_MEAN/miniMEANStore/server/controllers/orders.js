@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Order = mongoose.model('Order')
 
-console.log('loading products controler...');
+console.log('loading orders controller...');
 
 module.exports = {
   create: function(req, res) {

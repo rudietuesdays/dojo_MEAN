@@ -12,6 +12,8 @@
   "dependencies": {
     "express": "^4.13.4",
     "body-parser": "latest",
-    "mongoose" : "latest"
+    "moment": "^2.18.1",
+    "mongoose" : "latest",
+    "mongoose-validator": "^1.2.5"
   }
 }

@@ -6,11 +6,20 @@ var CustomerSchema = new Schema({
 
 	name: {
 		type: String,
-		required: true
+		required: [true, 'Enter a customer name'],
+		unique: [true, 'Customer already exists']
 	},
 
-	products: [{type: Schema.Types.ObjectId, ref: 'Product'}],
+},{timestamps:true});
 
-},{timestamps:true})
+CustomerSchema.path('name').validate(function(value, done) {
+    this.model('Customer').count({ name: value }, function(err, count) {
+        if (err) {
+            return done(err);
+        }
+        // If `count` is greater than zero, "invalidate"
+        done(!count);
+    });
+}, 'Customer already exists');
 
 mongoose.model('Customer', CustomerSchema);

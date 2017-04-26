@@ -1,11 +1,12 @@
 <div ng-controller="mainController">
-	<div class="products">
-		<p>product</p>
-		<p>product</p>
-		<p>product</p>
-		<a href="#!/products">show more...</a>
+	<div class="products" ng-repeat="product in products | limitTo: 3">
+		<p><img src="{{product.image}}" style='width:128px'></p>
+		<p>{{product.name}}</p>
+		<p>({{product.quantity}} left)</p>
 	</div>
+	<a href="#!/products">show more...</a>
 	<div class="orders">
+		<h4>Recent Orders</h4>
 		<p>order</p>
 		<p>order</p>
 		<p>order</p>
@@ -13,9 +14,8 @@
 		<a href="#!/orders">show all orders...</a>
 	</div>
 	<div class="customers">
-		<p>customer</p>
-		<p>customer</p>
-		<p>customer</p>
+		<h4>New customers</h4>
+		<p ng-repeat="customer in customers | limitTo: 3">{{customer.name}} joined the store on {{ customer.createdAt | date: "MMMM d, yyyy" }}</p>
 		<a href="#!/customers">show all customers...</a>
 	</div>
 </div>

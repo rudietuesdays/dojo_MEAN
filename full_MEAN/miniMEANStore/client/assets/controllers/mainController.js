@@ -1,17 +1,25 @@
-app.controller('mainController', ['welcomeFactory','$scope','$location','$routeParams', function(welcomeFactory, $scope, $location, $routeParams) {
-  $scope.index = function(){
-    welcomeFactory.index(function(welcome_message){
-      $scope.message = welcome_message;
-    })
+app.controller('mainController', ['customerFactory', 'productFactory','$scope','$location','$routeParams', function(customerFactory, productFactory, $scope, $location, $routeParams) {
+
+  console.log('main controller instantiated');
+
+  var index = function(){
+    var showCustomers = function(){
+      customerFactory.show(function(data){
+        $scope.customers = data.data.customers;
+        console.log('all customers: ', $scope.customers);
+      })
+    }
+
+    var showProducts = function(){
+      productFactory.show(function(data){
+        $scope.products = data.data.products;
+        console.log('all products: ', $scope.products);
+      })
+    }
+
+    showCustomers();
+    showProducts();
   }
-  $scope.create = function(){
-  	alert("Open your console!")
-  	console.log("welcomeController create function")
-  	console.log("$scope.user", $scope.user)
-  	welcomeFactory.create($scope.user, function(response_data){
-  		console.log("back inside welcome controller create method")
-  		$scope.newUser = response_data.data.user
-  	})
-  }
-  $scope.index();
+  index();
+
 }]);
